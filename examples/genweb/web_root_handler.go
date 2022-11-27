@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/ergo-services/ergo/gen"
+	"github.com/sllt/ergo/gen"
 )
 
 type rootHandler struct {

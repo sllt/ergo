@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/ergo-services/ergo/etf"
-	"github.com/ergo-services/ergo/gen"
+	"github.com/sllt/ergo/etf"
+	"github.com/sllt/ergo/gen"
 )
 
 type demo struct {

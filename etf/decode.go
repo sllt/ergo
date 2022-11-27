@@ -7,7 +7,7 @@ import (
 	"math/big"
 	"reflect"
 
-	"github.com/ergo-services/ergo/lib"
+	"github.com/sllt/ergo/lib"
 )
 
 // linked list for decoding complex types like list/map/tuple

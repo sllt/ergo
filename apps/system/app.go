@@ -1,10 +1,10 @@
 package system
 
 import (
-	"github.com/ergo-services/ergo/etf"
-	"github.com/ergo-services/ergo/gen"
-	"github.com/ergo-services/ergo/lib"
-	"github.com/ergo-services/ergo/node"
+	"github.com/sllt/ergo/etf"
+	"github.com/sllt/ergo/gen"
+	"github.com/sllt/ergo/lib"
+	"github.com/sllt/ergo/node"
 )
 
 func CreateApp(options node.System) gen.ApplicationBehavior {

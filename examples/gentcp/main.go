@@ -8,10 +8,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/ergo-services/ergo"
-	"github.com/ergo-services/ergo/gen"
-	"github.com/ergo-services/ergo/lib"
-	"github.com/ergo-services/ergo/node"
+	"github.com/sllt/ergo"
+	"github.com/sllt/ergo/gen"
+	"github.com/sllt/ergo/lib"
+	"github.com/sllt/ergo/node"
 )
 
 var (

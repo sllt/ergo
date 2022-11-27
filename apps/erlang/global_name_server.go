@@ -1,8 +1,8 @@
 package erlang
 
 import (
-	"github.com/ergo-services/ergo/etf"
-	"github.com/ergo-services/ergo/gen"
+	"github.com/sllt/ergo/etf"
+	"github.com/sllt/ergo/gen"
 )
 
 // TODO: https://github.com/erlang/otp/blob/master/lib/kernel/src/global.erl

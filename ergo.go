@@ -3,13 +3,13 @@ package ergo
 import (
 	"context"
 
-	"github.com/ergo-services/ergo/apps/cloud"
-	"github.com/ergo-services/ergo/apps/erlang"
-	"github.com/ergo-services/ergo/apps/system"
-	"github.com/ergo-services/ergo/gen"
-	"github.com/ergo-services/ergo/lib"
-	"github.com/ergo-services/ergo/node"
-	"github.com/ergo-services/ergo/proto/dist"
+	"github.com/sllt/ergo/apps/cloud"
+	"github.com/sllt/ergo/apps/erlang"
+	"github.com/sllt/ergo/apps/system"
+	"github.com/sllt/ergo/gen"
+	"github.com/sllt/ergo/lib"
+	"github.com/sllt/ergo/node"
+	"github.com/sllt/ergo/proto/dist"
 )
 
 // StartNode create new node with name and cookie string

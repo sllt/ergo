@@ -6,11 +6,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ergo-services/ergo"
-	"github.com/ergo-services/ergo/etf"
-	"github.com/ergo-services/ergo/gen"
-	"github.com/ergo-services/ergo/node"
-	"github.com/ergo-services/ergo/proto/dist"
+	"github.com/sllt/ergo"
+	"github.com/sllt/ergo/etf"
+	"github.com/sllt/ergo/gen"
+	"github.com/sllt/ergo/node"
+	"github.com/sllt/ergo/proto/dist"
 )
 
 // this test implemets distributed case of computing sum for the given

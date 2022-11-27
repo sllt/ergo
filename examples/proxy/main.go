@@ -4,8 +4,8 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/ergo-services/ergo"
-	"github.com/ergo-services/ergo/node"
+	"github.com/sllt/ergo"
+	"github.com/sllt/ergo/node"
 )
 
 func main() {
