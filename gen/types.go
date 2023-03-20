@@ -289,7 +289,7 @@ type ProcessState struct {
 	State interface{}
 }
 
-// ProcessBehavior interface contains methods you should implement to make own process behaviour
+// ProcessBehavior interface contains methods you should implement to make your own process behavior
 type ProcessBehavior interface {
 	ProcessInit(Process, ...etf.Term) (ProcessState, error)
 	ProcessLoop(ProcessState, chan<- bool) string // method which implements control flow of process
@@ -357,10 +357,10 @@ func (p ProcessID) String() string {
 // MessageDown delivers as a message to Server's HandleInfo callback of the process
 // that created monitor using MonitorProcess.
 // Reason values:
-//  - the exit reason of the process
-//  - 'noproc' (process did not exist at the time of monitor creation)
-//  - 'noconnection' (no connection to the node where the monitored process resides)
-//  - 'noproxy' (no connection to the proxy this node had has a connection through. monitored process could be still alive)
+//   - the exit reason of the process
+//   - 'noproc' (process did not exist at the time of monitor creation)
+//   - 'noconnection' (no connection to the node where the monitored process resides)
+//   - 'noproxy' (no connection to the proxy this node had has a connection through. monitored process could be still alive)
 type MessageDown struct {
 	Ref       etf.Ref   // a monitor reference
 	ProcessID ProcessID // if monitor was created by name
@@ -387,10 +387,10 @@ type MessageProxyDown struct {
 
 // MessageExit delievers to Server's HandleInfo callback on enabled trap exit using SetTrapExit(true)
 // Reason values:
-//  - the exit reason of the process
-//  - 'noproc' (process did not exist at the time of link creation)
-//  - 'noconnection' (no connection to the node where the linked process resides)
-//  - 'noproxy' (no connection to the proxy this node had has a connection through. linked process could be still alive)
+//   - the exit reason of the process
+//   - 'noproc' (process did not exist at the time of link creation)
+//   - 'noconnection' (no connection to the node where the linked process resides)
+//   - 'noproxy' (no connection to the proxy this node had has a connection through. linked process could be still alive)
 type MessageExit struct {
 	Pid    etf.Pid
 	Reason string
@@ -401,17 +401,6 @@ type MessageFallback struct {
 	Process etf.Pid
 	Tag     string
 	Message etf.Term
-}
-
-// RPC defines rpc function type
-type RPC func(...etf.Term) etf.Term
-
-// MessageManageRPC is using to manage RPC feature provides by "rex" process
-type MessageManageRPC struct {
-	Provide  bool
-	Module   string
-	Function string
-	Fun      RPC
 }
 
 // MessageDirectChildren type intended to be used in Process.Children which returns []etf.Pid

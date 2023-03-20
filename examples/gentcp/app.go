@@ -17,7 +17,7 @@ func (ta *tcpApp) Load(args ...etf.Term) (gen.ApplicationSpec, error) {
 		Description: "Demo TCP Applicatoin",
 		Version:     "v.1.0",
 		Children: []gen.ApplicationChildSpec{
-			gen.ApplicationChildSpec{
+			{
 				Child: &tcpServer{}, // tcp_server.go
 				Name:  "tcp",
 			},
