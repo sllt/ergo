@@ -4,14 +4,14 @@ All notable changes to this project will be documented in this file.
 This format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-#### [v2.2.2](https://github.com/ergo-services/ergo/releases/tag/v1.999.222) 2023-03-01 [tag version v1.999.222] ####
+#### [v2.2.2](https://github.com/sllt/ergo/releases/tag/v1.999.222) 2023-03-01 [tag version v1.999.222] ####
 
 * Introduced `gen.Pool`. This behavior implements a basic design pattern with a pool of workers. All messages/requests received by the pool process are forwarded to the workers using the "Round Robin" algorithm. The worker process is automatically restarting on termination. See example here [examples/genpool](https://github.com/ergo-services/examples/tree/master/genpool)
 * Removed Erlang RPC support. A while ago Erlang has changed the way of handling this kind of request making this feature more similar to the regular `gen.Server`. So, there is no reason to keep supporting it. Use a regular way of messaging instead - `gen.Server`. 
 * Fixed issue #130 (`StartType` option in `gen.ApplicationSpec` is ignored for the autostarting applications)
 * Fixed issue #143 (incorrect cleaning up the aliases belonging to the terminated process)
 
-#### [v2.2.1](https://github.com/ergo-services/ergo/releases/tag/v1.999.221) 2023-01-18 [tag version v1.999.221] ####
+#### [v2.2.1](https://github.com/sllt/ergo/releases/tag/v1.999.221) 2023-01-18 [tag version v1.999.221] ####
 
 * Now you can join your services made with Ergo Framework into a single cluster with transparent networking using our **Cloud Overlay Network** where they can connect to each other smoothly, no matter where they run - AWS, Azure or GCP, or anywhere else. All these connections are secured with end-to-end encryption. Read more in this article [https://https://medium.com/@ergo-services/cloud-overlay-network](https://https://medium.com/@ergo-services/cloud-overlay-network). Here is an example of this feature in action [examples/cloud](https://github.com/ergo-services/examples/tree/master/cloud)
 * `examples` moved to https://github.com/ergo-services/examples
@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fixed #117 (incorrect hanshake process finalization)
 * Fixed #139 (panic of the gen.Stage partition dispatcher)
 
-#### [v2.2.0](https://github.com/ergo-services/ergo/releases/tag/v1.999.220) 2022-10-18 [tag version v1.999.220] ####
+#### [v2.2.0](https://github.com/sllt/ergo/releases/tag/v1.999.220) 2022-10-18 [tag version v1.999.220] ####
 
 * Introduced `gen.Web` behavior. It implements **Web API Gateway pattern** is also sometimes known as the "Backend For Frontend" (BFF). See example [examples/genweb](https://github.com/ergo-services/examples/tree/master/genweb)
 * Introduced `gen.TCP` behavior - **socket acceptor pool for TCP protocols**. It provides everything you need to accept TCP connections and process packets with a small code base and low latency. Here is simple example [examples/gentcp](https://github.com/ergo-services/examples/tree/master/gentcp)
@@ -44,7 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fixed incorrect `gen.ProcessOptions.Context` handling
 
 
-#### [v2.1.0](https://github.com/ergo-services/ergo/releases/tag/v1.999.210) 2022-04-19 [tag version v1.999.210] ####
+#### [v2.1.0](https://github.com/sllt/ergo/releases/tag/v1.999.210) 2022-04-19 [tag version v1.999.210] ####
 
 * Introduced **compression feature** support. Here are new methods and options to manage this feature:
   - `gen.Process`:
@@ -88,11 +88,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Updated minimal requirement of Golang version to 1.17 (go.mod)
 * We still keep the rule **Zero Dependencies**
 
-#### [v2.0.0](https://github.com/ergo-services/ergo/releases/tag/v1.999.200) 2021-10-12 [tag version v1.999.200] ####
+#### [v2.0.0](https://github.com/sllt/ergo/releases/tag/v1.999.200) 2021-10-12 [tag version v1.999.200] ####
 
 * Added support of Erlang/OTP 24 (including [Alias](https://blog.erlang.org/My-OTP-24-Highlights/#eep-53-process-aliases) feature and [Remote Spawn](https://blog.erlang.org/OTP-23-Highlights/#distributed-spawn-and-the-new-erpc-module) introduced in Erlang/OTP 23)
 * **Important**: This release includes refined API (without backward compatibility) for a more convenient way to create OTP-designed microservices. Make sure to update your code.
-* **Important**: Project repository has been moved to [https://github.com/ergo-services/ergo](https://github.com/ergo-services/ergo). It is still available on the old URL [https://github.com/halturin/ergo](https://github.com/halturin/ergo) and GitHub will redirect all requests to the new one (thanks to GitHub for this feature).
+* **Important**: Project repository has been moved to [https://github.com/sllt/ergo](https://github.com/sllt/ergo). It is still available on the old URL [https://github.com/halturin/ergo](https://github.com/halturin/ergo) and GitHub will redirect all requests to the new one (thanks to GitHub for this feature).
 * Introduced new behavior `gen.Saga`. It implements Saga design pattern - a sequence of transactions that updates each service state and publishes the result (or cancels the transaction or triggers the next transaction step). `gen.Saga` also provides a feature of interim results (can be used as transaction progress or as a part of pipeline processing), time deadline (to limit transaction lifespan), two-phase commit (to make distributed transaction atomic). Here is example [examples/gensaga](https://github.com/ergo-services/examples/tree/master/gensaga).
 * Introduced new methods `Process.Direct` and `Process.DirectWithTimeout` to make direct request to the actor (`gen.Server` or inherited object). If an actor has no implementation of `HandleDirect` callback it returns `ErrUnsupportedRequest` as a error.
 * Introduced new callback `HandleDirect` in the `gen.Server` interface as a handler for requests made by `Process.Direct` or `Process.DirectWithTimeout`. It should be easy to interact with actors from outside.
@@ -113,7 +113,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fixed Atom Cache race conditioned issue #54
 * Fixed ETF encoder issues #64 #66
 
-#### [v1.2.0](https://github.com/ergo-services/ergo/releases/tag/v1.2.0) - 2021-04-07 [tag version v1.2.0] ####
+#### [v1.2.0](https://github.com/sllt/ergo/releases/tag/v1.2.0) - 2021-04-07 [tag version v1.2.0] ####
 
 * Added TLS support. Introduced new option `TLSmode` in `ergo.NodeOptions` with the following values:
   - `ergo.TLSmodeDisabled` default value. encryption is disabled
@@ -128,18 +128,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Improved DIST implementation in order to support KeepAlive messages and get rid of platform-dependent `syscall` usage
 * Fixed `TermIntoStruct` function. There was a problem with `Tuple` value transforming into the given struct
 * Fixed incorrect decoding atoms `true`, `false` into the booleans
-* Fixed race condition and freeze of connection serving in corner case [#21](https://github.com/ergo-services/ergo/issues/21)
+* Fixed race condition and freeze of connection serving in corner case [#21](https://github.com/sllt/ergo/issues/21)
 * Fixed problem with monitoring process by the registered name (local and remote)
 * Fixed issue with termination linked processes
 * Fixed platform-dependent issues. Now Ergo Framework has tested and confirmed support of Linux, MacOS, Windows.
 
-#### [v1.1.0](https://github.com/ergo-services/ergo/releases/tag/v1.1.0) - 2020-04-23 [tag version v1.1.0] ####
+#### [v1.1.0](https://github.com/sllt/ergo/releases/tag/v1.1.0) - 2020-04-23 [tag version v1.1.0] ####
 
 * Fragmentation support (which was introduced in Erlang/OTP 22)
 * Completely rewritten network subsystem (DIST/ETF).
 * Improved performance in terms of network messaging (outperforms original Erlang/OTP up to x5 times. See [Benchmarks](#benchmarks))
 
-#### [v1.0.0](https://github.com/ergo-services/ergo/releases/tag/1.0.0) - 2020-03-03 [tag version 1.0.0] ####
+#### [v1.0.0](https://github.com/sllt/ergo/releases/tag/1.0.0) - 2020-03-03 [tag version 1.0.0] ####
 
 * We have changed the name - Ergo (or Ergo Framework). GitHub's repo has been
 renamed as well. We also created cloned repo `ergonode` to support users of
@@ -155,7 +155,7 @@ the new one.
 * Improved ETF TermIntoStruct decoder
 * Improved code structure and readability
 
-#### [v0.2.0](https://github.com/ergo-services/ergo/releases/tag/0.2.0) - 2019-02-23 [tag version 0.2.0] ####
+#### [v0.2.0](https://github.com/sllt/ergo/releases/tag/0.2.0) - 2019-02-23 [tag version 0.2.0] ####
 * Now we make versioning releases
 * Improve node creation. Now you can specify the listening port range. See 'Usage' for details
 * Add embedded EPMD. Trying to start internal epmd service on starting ergonode.

@@ -2,7 +2,7 @@
 
 Anybody willing to contribute to the project either with code, documentation, security reviews or whatever, are very 
 welcome to create or review pull requests and take part in discussions in any of our public [Discord community](https://discord.gg/sdscxKGV62), 
-[Telegram group](https://t.me/ergo_services) or [GitHub Discussions](https://github.com/ergo-services/ergo/discussions)
+[Telegram group](https://t.me/ergo_services) or [GitHub Discussions](https://github.com/sllt/ergo/discussions)
 
 ## License
 
@@ -38,7 +38,7 @@ Ergo Framework is licensed under the MIT License, as stated in [LICENSE](LICENSE
 
 ## Reporting a bug or a feature request
 
-Report bugs at https://github.com/ergo-services/ergo/issues
+Report bugs at https://github.com/sllt/ergo/issues
 
 If you've found a **bug** or have a **feature request** then please create an issue in this repository (but search first in case a similar issue already exists).
 
