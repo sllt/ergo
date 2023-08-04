@@ -12,9 +12,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/sllt/ergo/etf"
-	"github.com/sllt/ergo/lib"
-	"github.com/sllt/ergo/node"
+	"github.com/ergo-services/ergo/etf"
+	"github.com/ergo-services/ergo/lib"
+	"github.com/ergo-services/ergo/node"
 )
 
 const (

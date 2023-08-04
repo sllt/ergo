@@ -1,7 +1,7 @@
 <h1><a href="https://ergo.services"><img src=".github/images/logo.svg" alt="Ergo Framework" width="159" height="49"></a></h1>
 
 <!--[![Gitbook Documentation](https://img.shields.io/badge/GitBook-Documentation-f37f40?style=plastic&logo=gitbook&logoColor=white&style=flat)](https://docs.ergo.services) -->
-[![GoDoc](https://pkg.go.dev/badge/ergo-services/ergo)](https://pkg.go.dev/github.com/sllt/ergo)
+[![GoDoc](https://pkg.go.dev/badge/ergo-services/ergo)](https://pkg.go.dev/github.com/ergo-services/ergo)
 [![MIT license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 [![Telegram Community](https://img.shields.io/badge/Telegram-Community-blue?style=flat&logo=telegram)](https://t.me/ergo_services)
 [![Discord Community](https://img.shields.io/badge/Discord-Community-5865F2?style=flat&logo=discord&logoColor=white)](https://discord.gg/sdscxKGV62)
@@ -20,6 +20,57 @@ The goal of this project is to leverage Erlang/OTP experience with Golang perfor
 ### Cloud ###
 
 Distributed Cloud is coming. With Ergo Framework you can join your services into a single cluster with transparent networking using our **Cloud Overlay Network** where they can connect to each other smoothly, no matter where they run - AWS, Azure or GCP, or anywhere else. All these connections are secured with end-to-end encryption. Read more in this article [https://blog.ergo.services/cloud-overlay-network-3a133d47efe5](https://blog.ergo.services/cloud-overlay-network-3a133d47efe5).
+
+### Quick start ###
+
+First, you need to install the boilerplate code generation tool `ergo` - https://github.com/ergo-services/tools using command below
+
+`go install ergo.services/tools/ergo@latest`
+
+And then, you can create your project with just one command. Here is example:
+
+   Supervision tree
+   ```
+   mynode
+   |- myapp
+   |   |
+   |    `- mysup
+   |        |
+   |         `- myactor
+   |- myweb
+   `- myactor2
+   ```
+
+   To generate project for this design use the following command:
+
+   `ergo -init MyNode -with-app MyApp -with-sup MyApp:MySup -with-actor MySup:MyActor -with-web "MyWeb{port:8000,handlers:3}" -with-actor MyActor2`
+
+   as a result you will get generated project:
+
+   ```
+      mynode/
+      |-- apps/
+      |   `-- myapp/
+      |       |-- myactor.go
+      |       |-- myapp.go
+      |       `-- mysup.go
+      |-- cmd/
+      |   |-- myactor2.go
+      |   |-- mynode.go
+      |   |-- myweb.go
+      |   `-- myweb_handler.go
+      |-- README.md
+      |-- go.mod
+      `-- go.sum
+   ```
+
+   to try it:
+   ```
+   $ cd mynode
+   $ go run ./cmd/
+   ```
+
+   You may also read our article about this tool with a great example https://blog.ergo.services/quick-start-1094d56d4e2
 
 ### Features ###
 
@@ -61,26 +112,12 @@ Golang introduced [v2 rule](https://go.dev/blog/v2-go-modules) a while ago to so
 
 Here are the changes of latest release. For more details see the [ChangeLog](ChangeLog.md)
 
-#### [v2.2.2](https://github.com/sllt/ergo/releases/tag/v1.999.222) 2023-03-01 [tag version v1.999.222] ####
+#### [v2.2.4](https://github.com/ergo-services/ergo/releases/tag/v1.999.224) 2023-05-01 [tag version v1.999.224] ####
 
-* Introduced `gen.Pool`. This behavior implements a basic design pattern with a pool of workers. All messages/requests received by the pool process are forwarded to the workers using the "Round Robin" algorithm. The worker process is automatically restarting on termination. See example here [examples/genpool](https://github.com/ergo-services/examples/tree/master/genpool)
-* Removed Erlang RPC support. A while ago Erlang has changed the way of handling this kind of request making this feature more similar to the regular `gen.Server`. So, there is no reason to keep supporting it. Use a regular way of messaging instead - `gen.Server`. 
-* Fixed issue #130 (`StartType` option in `gen.ApplicationSpec` is ignored for the autostarting applications)
-* Fixed issue #143 (incorrect cleaning up the aliases belonging to the terminated process)
-
-#### [v2.2.1](https://github.com/sllt/ergo/releases/tag/v1.999.221) 2023-02-01 [tag version v1.999.221] ####
-
-* Now you can join your services made with Ergo Framework into a single cluster with transparent networking using our **Cloud Overlay Network** where they can connect to each other smoothly, no matter where they run - AWS, Azure or GCP, or anywhere else. All these connections are secured with end-to-end encryption. Read more in this article [https://blog.ergo.services/cloud-overlay-network-3a133d47efe5](https://blog.ergo.services/cloud-overlay-network-3a133d47efe5). Here is an example of this feature in action [examples/cloud](https://github.com/ergo-services/examples/tree/master/cloud)
-* `examples` moved to https://github.com/ergo-services/examples
-* Added support Erlang OTP/25
-* Improved handling `nil` values for the registered types using `etf.RegisterType(...)`
-* Improved self-signed certificate generation
-* Introduced `ergo.debug` option that enables extended debug information for `lib.Log(...)`/`lib.Warning(...)`
-* Fixed `gen.TCP` and `gen.UDP` (missing callbacks)
-* Fixed ETF registering type with `etf.Pid`, `etf.Alias` or `etf.Ref` value types
-* Fixed Cloud client
-* Fixed #117 (incorrect hanshake process finalization)
-* Fixed #139 (panic of the gen.Stage partition dispatcher)
+This release includes fixes:
+- Fixed incorrect handling of `gen.SupervisorStrategyRestartTransient` restart strategy in `gen.Supervisor`
+- Fixed missing `ServerBehavior` in [`gen.Pool`, `gen.Raft`, `gen.Saga`, `gen.Stage`, `gen.TCP`, `gen.UDP`, `gen.Web`] behavior interfaces
+- Introduced the new tool for boilerplate code generation - `ergo` https://github.com/ergo-services/tools. You may read more information about this tool in our article with a great example https://blog.ergo.services/quick-start-1094d56d4e2
 
 ### Benchmarks ###
 
@@ -92,13 +129,13 @@ Hardware: workstation with AMD Ryzen Threadripper 3970X (64) @ 3.700GHz
 ❯❯❯❯ go test -bench=NodeParallel -run=XXX -benchtime=10s
 goos: linux
 goarch: amd64
-pkg: github.com/sllt/ergo/tests
+pkg: github.com/ergo-services/ergo/tests
 cpu: AMD Ryzen Threadripper 3970X 32-Core Processor
 BenchmarkNodeParallel-64                 4738918              2532 ns/op
 BenchmarkNodeParallelSingleNode-64      100000000              429.8 ns/op
 
 PASS
-ok      github.com/sllt/ergo/tests  29.596s
+ok      github.com/ergo-services/ergo/tests  29.596s
 ```
 
 these numbers show almost **500.000 sync requests per second** for the network messaging via localhost and **10.000.000 sync requests per second** for the local messaging (within a node).
@@ -111,13 +148,13 @@ This benchmark shows the performance of compression for sending 1MB message betw
 ❯❯❯❯ go test -bench=NodeCompression -run=XXX -benchtime=10s
 goos: linux
 goarch: amd64
-pkg: github.com/sllt/ergo/tests
+pkg: github.com/ergo-services/ergo/tests
 cpu: AMD Ryzen Threadripper 3970X 32-Core Processor
 BenchmarkNodeCompressionDisabled1MBempty-64         2400           4957483 ns/op
 BenchmarkNodeCompressionEnabled1MBempty-64          5769           2088051 ns/op
 BenchmarkNodeCompressionEnabled1MBstring-64         5202           2077099 ns/op
 PASS
-ok      github.com/sllt/ergo/tests     56.708s
+ok      github.com/ergo-services/ergo/tests     56.708s
 ```
 
 It demonstrates **more than 2 times** improvement.
@@ -130,13 +167,13 @@ This benchmark demonstrates how proxy feature and e2e encryption impact a messag
 ❯❯❯❯ go test -bench=NodeProxy -run=XXX -benchtime=10s
 goos: linux
 goarch: amd64
-pkg: github.com/sllt/ergo/tests
+pkg: github.com/ergo-services/ergo/tests
 cpu: AMD Ryzen Threadripper 3970X 32-Core Processor
 BenchmarkNodeProxy_NodeA_to_NodeC_direct_Message_1KB-64                     1908477       6337 ns/op
 BenchmarkNodeProxy_NodeA_to_NodeC_via_NodeB_Message_1KB-64                  1700984       7062 ns/op
 BenchmarkNodeProxy_NodeA_to_NodeC_via_NodeB_Message_1KB_Encrypted-64        1271125       9410 ns/op
 PASS
-ok      github.com/sllt/ergo/tests     45.649s
+ok      github.com/ergo-services/ergo/tests     45.649s
 
 ```
 
@@ -167,8 +204,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/sllt/ergo/etf"
-	"github.com/sllt/ergo/gen"
+	"github.com/ergo-services/ergo/etf"
+	"github.com/ergo-services/ergo/gen"
 )
 
 type simple struct {

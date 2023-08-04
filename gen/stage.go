@@ -50,6 +50,7 @@ var (
 
 // StageBehavior interface for the Stage inmplementation
 type StageBehavior interface {
+	ServerBehavior
 
 	// InitStage
 	InitStage(process *StageProcess, args ...etf.Term) (StageOptions, error)

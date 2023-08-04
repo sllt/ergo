@@ -3,11 +3,13 @@ package gen
 import (
 	"fmt"
 
-	"github.com/sllt/ergo/etf"
-	"github.com/sllt/ergo/lib"
+	"github.com/ergo-services/ergo/etf"
+	"github.com/ergo-services/ergo/lib"
 )
 
 type PoolBehavior interface {
+	ServerBehavior
+
 	InitPool(process *PoolProcess, args ...etf.Term) (PoolOptions, error)
 }
 
